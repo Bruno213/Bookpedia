@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -247,11 +248,26 @@ private fun BookListScreen(
 @Preview
 @Composable
 fun BookListScreenPreview() {
-  BookListScreen(
-    state = BookListState(
-      searchResults = books,
+  val books = remember {
+    (1 .. 100).map {
+      Book(
+        id = it.toString(),
+        imageUrl = "https://test.com",
+        title = "Book $it",
+        authors = listOf("OEReaper"),
+        description = "Description $it",
+        languages = emptyList(),
+        firstPublishYear = null,
+        averageRating = 4.6354354,
+        ratingCount = 5,
+        numPages = 100,
+        numEditions = 3
+      )
+    }
+  }
 
-    ),
+  BookListScreen(
+    state = BookListState(searchResults = books),
     onAction = {}
   )
 }

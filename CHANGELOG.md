@@ -1,6 +1,18 @@
 # Changelog
 
-## - 2026-04-08
+## [1.2.0] - 2026-04-08
+
+### Added
+
+* Set up dependency injection using Koin
+  * Define modules and initialize Koin in each platform entry point
+* Adopt semantic versioning for the changelog
+
+### Changed
+
+* Move dummy book data to BookListScreenPreview
+
+## [1.1.0] - 2026-04-08
 
 ### Added
 
@@ -13,9 +25,9 @@
 
 ### Fixed
 
-* Fix missing kotlin serialization dependency
+* Fix missing Kotlin serialization dependency
 
-## - 2026-04-07
+## [1.0.0] - 2026-04-07
 
 ### Added
 

@@ -9,5 +9,3 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
-
-actual fun httpClientEngine(): HttpClientEngine = Darwin.create()

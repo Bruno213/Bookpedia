@@ -8,5 +8,3 @@ class JVMPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = JVMPlatform()
-
-actual fun httpClientEngine(): HttpClientEngine = OkHttp.create()

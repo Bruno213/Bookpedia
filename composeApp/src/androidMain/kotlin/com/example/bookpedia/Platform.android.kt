@@ -9,5 +9,3 @@ class AndroidPlatform : Platform {
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
-
-actual fun httpClientEngine(): HttpClientEngine = OkHttp.create()
