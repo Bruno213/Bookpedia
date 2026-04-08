@@ -60,7 +60,7 @@ fun BookListItem(
   ) {
     Row(
       modifier = Modifier
-        .padding(horizontal = 16.dp)
+        .padding(16.dp)
         .fillMaxWidth()
         .height(IntrinsicSize.Min),
       verticalAlignment = Alignment.CenterVertically,
