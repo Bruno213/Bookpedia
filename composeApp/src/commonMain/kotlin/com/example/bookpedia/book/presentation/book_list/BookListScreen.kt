@@ -50,17 +50,17 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun BookListScreenRoot(
   viewModel: BookListViewModel = koinViewModel(),
-  onBookClick: (Book)-> Unit,
-  modifier: Modifier
+  onBookClick: (Book) -> Unit,
+  modifier: Modifier = Modifier
 ) {
   val state by viewModel.state.collectAsStateWithLifecycle()
 
   BookListScreen(
     state = state,
     onAction = { action ->
-      when(action) {
+      when (action) {
         is BookListAction.OnBookClick -> onBookClick(action.book)
-       else -> Unit
+        else -> Unit
       }
 
       viewModel.onAction(action)
@@ -89,7 +89,7 @@ private fun BookListScreen(
   }
 
   LaunchedEffect(pagerState.currentPage) {
-      onAction(BookListAction.OnTabSelected(pagerState.currentPage))
+    onAction(BookListAction.OnTabSelected(pagerState.currentPage))
   }
 
   Column(
@@ -143,7 +143,7 @@ private fun BookListScreen(
         {
           Tab(
             selected = state.selectedTabIndex == 0,
-            onClick = {  onAction(BookListAction.OnTabSelected(0)) },
+            onClick = { onAction(BookListAction.OnTabSelected(0)) },
             modifier = Modifier
               .weight(1f)
               .padding(vertical = 12.dp),
@@ -185,11 +185,12 @@ private fun BookListScreen(
               .padding(horizontal = 16.dp),
             contentAlignment = Alignment.Center
           ) {
-            when(pageIndex) {
+            when (pageIndex) {
               0 -> {
-                if(state.isLoading) {
+                if (state.isLoading) {
                   CircularProgressIndicator()
-                } else {
+                }
+                else {
                   when {
                     state.errorMessage != null -> {
                       Text(
@@ -211,7 +212,7 @@ private fun BookListScreen(
                     else -> {
                       BookList(
                         books = state.searchResults,
-                        onBookClick = { onAction(BookListAction.OnBookClick(it))},
+                        onBookClick = { onAction(BookListAction.OnBookClick(it)) },
                         modifier = Modifier
                           .fillMaxSize(),
                         scrollState = searchResultsListState
@@ -220,17 +221,19 @@ private fun BookListScreen(
                   }
                 }
               }
+
               1 -> {
-                if(state.favoriteBooks.isEmpty()) {
+                if (state.favoriteBooks.isEmpty()) {
                   Text(
                     text = stringResource(Res.string.no_favorites),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.headlineSmall
                   )
-                } else {
+                }
+                else {
                   BookList(
                     books = state.favoriteBooks,
-                    onBookClick = { onAction(BookListAction.OnBookClick(it))},
+                    onBookClick = { onAction(BookListAction.OnBookClick(it)) },
                     modifier = Modifier
                       .fillMaxSize(),
                     scrollState = favoritesListState
@@ -249,7 +252,7 @@ private fun BookListScreen(
 @Composable
 fun BookListScreenPreview() {
   val books = remember {
-    (1 .. 100).map {
+    (1..100).map {
       Book(
         id = it.toString(),
         imageUrl = "https://test.com",

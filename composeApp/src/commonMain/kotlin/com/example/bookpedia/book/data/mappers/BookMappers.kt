@@ -1,11 +1,11 @@
 package com.example.bookpedia.book.data.mappers
 
-import com.example.bookpedia.book.data.SearchBookDto
+import com.example.bookpedia.book.data.dto.SearchBookDto
 import com.example.bookpedia.book.domain.Book
 
 fun SearchBookDto.toBook(): Book {
   return Book(
-    id = id,
+    id = id.substringAfterLast("/"),
     title = title,
     imageUrl = if (coverKey != null) "https://covers.openlibrary.org/b/olid/${coverKey}-L.jpg"
     else "https://covers.openlibrary.org/b/id/${coverAlternativeKey}-L.jpg",

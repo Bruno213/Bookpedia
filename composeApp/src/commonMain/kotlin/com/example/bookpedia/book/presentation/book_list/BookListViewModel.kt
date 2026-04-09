@@ -31,7 +31,7 @@ class BookListViewModel(
   private val _state = MutableStateFlow(BookListState())
   val state = _state
     .onStart {
-      if(cachedBooks.isEmpty()) {
+      if (cachedBooks.isEmpty()) {
         observeSearchQuery()
       }
     }
@@ -68,6 +68,7 @@ class BookListViewModel(
             _state.update {
               it.copy(
                 errorMessage = null,
+                isLoading = false,
                 searchResults = cachedBooks
               )
             }
@@ -83,9 +84,11 @@ class BookListViewModel(
   }
 
   private fun searchBooks(query: String) = viewModelScope.launch {
-    _state.update { it.copy(
+    _state.update {
+      it.copy(
         isLoading = true
-      ) }
+      )
+    }
 
     bookRepository
       .searchBooks(query)

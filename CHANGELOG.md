@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0] - 2026-04-10
+
+### Added
+
+* Set up navigation with Jetpack Compose Navigation
+* Implement book details UI
+* Connect API Data to book details UI
+  * Custom serializer for getting book description data due to API design
+
+### Changed
+
+* Applied code formatting to standardize style across project files
+
 ## [1.2.0] - 2026-04-08
 
 ### Added

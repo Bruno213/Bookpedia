@@ -1,7 +1,6 @@
 package com.example.bookpedia.book.presentation.book_list.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
@@ -48,7 +45,7 @@ import kotlin.math.round
 @Composable
 fun BookListItem(
   book: Book,
-  onClick: ()-> Unit,
+  onClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
   Surface(
@@ -57,7 +54,7 @@ fun BookListItem(
       .clickable(onClick = onClick),
     color = LightBlue.copy(alpha = 0.2f),
 
-  ) {
+    ) {
     Row(
       modifier = Modifier
         .padding(16.dp)
@@ -75,9 +72,10 @@ fun BookListItem(
         val painter = rememberAsyncImagePainter(
           model = book.imageUrl,
           onSuccess = {
-            imageLoadResult = if(it.painter.intrinsicSize.width > 1 && it.painter.intrinsicSize.height > 1) {
+            imageLoadResult = if (it.painter.intrinsicSize.width > 1 && it.painter.intrinsicSize.height > 1) {
               Result.success(it.painter)
-            } else {
+            }
+            else {
               Result.failure(Exception("Invalid image size"))
             }
           },
@@ -87,13 +85,13 @@ fun BookListItem(
           }
         )
 
-        when(val result = imageLoadResult) {
+        when (val result = imageLoadResult) {
           null -> CircularProgressIndicator()
           else -> {
             Image(
-              painter = if(result.isSuccess) painter else painterResource(Res.drawable.book_error_2),
+              painter = if (result.isSuccess) painter else painterResource(Res.drawable.book_error_2),
               contentDescription = null,
-              contentScale = if(result.isSuccess) ContentScale.Crop else ContentScale.Fit,
+              contentScale = if (result.isSuccess) ContentScale.Crop else ContentScale.Fit,
               modifier = Modifier
                 .aspectRatio(
                   ratio = 0.65f,
