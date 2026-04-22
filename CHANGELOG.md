@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0] - 2026-04-22
+
+### Added
+
+* Set up Room database for storing favorite books
+  * Add DAOs, models, and mappers
+  * Add String-to-List converter
+  * Generate schema
+
+### Fixed
+
+* Fix KSP dependency setup
+
 ## [1.3.0] - 2026-04-10
 
 ### Added

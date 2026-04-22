@@ -16,6 +16,7 @@ kotlin {
   androidTarget {
     compilerOptions {
       jvmTarget.set(JvmTarget.JVM_11)
+      freeCompilerArgs.add("-Xexpect-actual-classes")
     }
   }
 
@@ -40,6 +41,8 @@ kotlin {
       implementation(libs.compose.uiToolingPreview)
       implementation(libs.androidx.activity.compose)
 
+      implementation(libs.koin.android)
+      implementation(libs.koin.androidx.compose)
       implementation(libs.ktor.client.okhttp)
     }
     commonMain.dependencies {
@@ -110,6 +113,9 @@ android {
 
 dependencies {
   debugImplementation(libs.compose.uiTooling)
+  add("kspAndroid", libs.androidx.room.compiler)
+  add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+  add("kspIosArm64", libs.androidx.room.compiler)
 }
 
 compose.desktop {

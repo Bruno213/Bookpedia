@@ -9,6 +9,8 @@ import com.example.bookpedia.book.domain.BookRepository
 import com.example.bookpedia.core.domain.onSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -16,13 +18,16 @@ import kotlinx.coroutines.launch
 
 class BookDetailsViewModel(
   private val bookRepository: BookRepository,
-  private val savedStateHandle: SavedStateHandle
+  savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+  private val bookId = savedStateHandle.toRoute<Route.BookDetail>().bookId
 
   private val _state = MutableStateFlow(BookDetailsState())
   val state = _state
     .onStart {
       fetchBookDescription()
+      observeFavoriteStatus()
     }
     .stateIn(
       viewModelScope,
@@ -33,7 +38,15 @@ class BookDetailsViewModel(
   fun onAction(action: BookDetailsAction) {
     when (action) {
       BookDetailsAction.OnBackClick -> {}
-      BookDetailsAction.OnFavoriteClick -> {}
+      BookDetailsAction.OnFavoriteClick -> {
+        viewModelScope.launch {
+          if(_state.value.isFavorite) {
+            bookRepository.unmarkAsFavorite(bookId)
+          } else {
+            _state.value.book?.let { bookRepository.markAsFavorite(it) }
+          }
+        }
+      }
       is BookDetailsAction.OnSelectedBookChange -> {
         _state.update {
           it.copy(
@@ -44,9 +57,17 @@ class BookDetailsViewModel(
     }
   }
 
+  private fun observeFavoriteStatus() {
+    bookRepository
+      .isBookFavorite(bookId)
+      .onEach { isFavorite ->
+        _state.update { it.copy(isFavorite = isFavorite) }
+      }
+      .launchIn(viewModelScope)
+  }
+
   private fun fetchBookDescription() {
     viewModelScope.launch {
-      val bookId = savedStateHandle.toRoute<Route.BookDetail>().bookId
       bookRepository
         .getBookDescription(bookId)
         .onSuccess { description ->
