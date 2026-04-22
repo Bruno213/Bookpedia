@@ -1,6 +1,14 @@
 # Changelog
 
-## [1.3.0] - 2026-04-22
+## [1.5.0] - 2026-04-22
+
+### Added
+
+* Show pulse animation during image loading
+* Custom screen transition animation
+
+
+## [1.4.0] - 2026-04-22
 
 ### Added
 

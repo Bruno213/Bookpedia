@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -43,6 +44,7 @@ import com.example.bookpedia.book.presentation.book_list.components.BookList
 import com.example.bookpedia.book.presentation.book_list.components.BookSearchBar
 import com.example.bookpedia.core.presentation.DarkBlue
 import com.example.bookpedia.core.presentation.DesertWhite
+import com.example.bookpedia.core.presentation.PulseAnimation
 import com.example.bookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -188,7 +190,10 @@ private fun BookListScreen(
             when (pageIndex) {
               0 -> {
                 if (state.isLoading) {
-                  CircularProgressIndicator()
+                  PulseAnimation(
+                    modifier = Modifier
+                      .size(60.dp)
+                  )
                 }
                 else {
                   when {
