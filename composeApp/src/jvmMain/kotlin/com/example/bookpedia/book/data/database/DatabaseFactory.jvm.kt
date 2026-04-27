@@ -11,7 +11,7 @@ actual class DatabaseFactory {
     val userHome = System.getProperty("user.home")
     val appDataDir = when {
       os.contains("win") -> File(System.getenv("APPDATA"), "Bookpedia")
-      os.contains("mac") -> File(userHome, "Library/ Application Support/Bookpedia")
+      os.contains("mac") -> File(userHome, "Library/Application Support/Bookpedia")
       else -> File(userHome, ".local/share/Bookpedia")
     }
 

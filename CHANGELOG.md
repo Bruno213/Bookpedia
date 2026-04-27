@@ -1,21 +1,28 @@
 # Changelog
 
-## [1.5.0] - 2026-04-22
+## [1.4.2] - 2026-04-27
+
+### Fixed
+
+* Fix incorrect KSP dependency setup for desktop jvm target
+* Fix database file path for mac in DatabaseFactory.jvm.kt
+
+## [1.4.1] - 2026-04-22
 
 ### Added
 
 * Show pulse animation during image loading
 * Custom screen transition animation
 
-
 ## [1.4.0] - 2026-04-22
 
 ### Added
 
-* Set up Room database for storing favorite books
-  * Add DAOs, models, and mappers
-  * Add String-to-List converter
-  * Generate schema
+* Implement local caching of favorite books
+  * Set up Room database
+    * Add DAOs, models, and mappers
+    * Add String-to-List converter
+    * Generate schema
 
 ### Fixed
 
